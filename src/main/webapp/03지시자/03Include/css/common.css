@@ -1,0 +1,13 @@
+body > *
+{
+    width: 85%;
+    margin: 0 auto;
+    position: relative;
+
+}
+
+ul
+{
+    list-style: none;
+    padding: 0;
+}
