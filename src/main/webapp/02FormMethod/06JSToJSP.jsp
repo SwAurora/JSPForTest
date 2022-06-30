@@ -35,7 +35,7 @@
         form[1].value = 'orange';
         form[2].value = 'red';
         form[3].value = 'beige';
-        form.action = '06.JSPToJS.jsp';
+        form.action = '06JSToJSP.jsp';
         form.submit();
     }
 </script>

@@ -1,5 +1,4 @@
 <%@ page import="Ch03.SampleDTO" %>
-<%@ page import="java.rmi.server.ExportException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" errorPage="04ErrorPage.jsp" %>
 <html>
 <head>
