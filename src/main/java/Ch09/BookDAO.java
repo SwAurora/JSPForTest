@@ -1,9 +1,6 @@
 package Ch09;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class BookDAO
@@ -219,10 +216,70 @@ public class BookDAO
         return list;
     }
 
-//    public static void main(String[] args)
-//    {
-//        BookDTO dto = new BookDTO(0, 10101010, "Title", "Publisher", 100, 10);
-//        BookDAO dao = BookDAO.getInstance();
-//        dao.Post200(dto);
-//    }
+    // 조회함수
+    public ArrayList<BookDTO> Select(Criteria cri, BookDTO search)
+    {
+        ArrayList<BookDTO> list = new ArrayList<>();
+
+        try
+        {
+            switch(cri.getType())
+            {
+                case "C":
+                    pstmt = conn.prepareStatement("select * from book_tbl where BookCode like concat ('%', ?, '%') limit ?");
+                    pstmt.setInt(1, search.getBookcode());
+                    pstmt.setInt(2, cri.getEnd());
+                    break;
+                case "N":
+                    pstmt = conn.prepareStatement("select * from book_tbl where BookName like concat ('%', ?, '%') limit ?");
+                    pstmt.setString(1, search.getBookname());
+                    pstmt.setInt(2, cri.getEnd());
+                    break;
+                case "P":
+                    pstmt = conn.prepareStatement("select * from book_tbl where Publisher like concat ('%', ?, '%') limit ?");
+                    pstmt.setString(1, search.getPublisher());
+                    pstmt.setInt(2, cri.getEnd());
+                    break;
+            }
+            rs = pstmt.executeQuery();
+
+            BookDTO dto;
+            while(rs.next())
+            {
+                dto = new BookDTO();
+                dto.setNo(rs.getInt("no"));
+                dto.setBookcode(rs.getInt("bookcode"));
+                dto.setBookname(rs.getString("bookname"));
+                dto.setPublisher(rs.getString("publisher"));
+                dto.setTotalpage(rs.getInt("totalpage"));
+                dto.setAmount(rs.getInt("amount"));
+
+                list.add(dto);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                rs.close();
+                pstmt.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        return list;
+    }
+    //    public static void main(String[] args)
+    //    {
+    //        BookDTO dto = new BookDTO(0, 10101010, "Title", "Publisher", 100, 10);
+    //        BookDAO dao = BookDAO.getInstance();
+    //        dao.Post200(dto);
+    //    }
 }
