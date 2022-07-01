@@ -12,6 +12,10 @@ public class BookDTO
     private int totalpage;
     private int amount;
 
+    public BookDTO()
+    {
+
+    }
     public BookDTO(int no, int bookcode, String bookname, String publisher, int totalpage, int amount)
     {
         this.no = no;

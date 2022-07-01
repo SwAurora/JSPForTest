@@ -1,10 +1,10 @@
 package Ch09;
 
-import java.awt.print.Book;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class BookDAO
 {
@@ -71,6 +71,152 @@ public class BookDAO
                 e.printStackTrace();
             }
         }
+    }
+
+    // 조회함수
+    public ArrayList<BookDTO> Select()
+    {
+        ArrayList<BookDTO> list = new ArrayList<>();
+
+        try
+        {
+            pstmt = conn.prepareStatement("select * from book_tbl");
+            rs = pstmt.executeQuery();
+
+            BookDTO dto;
+            while(rs.next())
+            {
+                dto = new BookDTO();
+                dto.setNo(rs.getInt("no"));
+                dto.setBookcode(rs.getInt("bookcode"));
+                dto.setBookname(rs.getString("bookname"));
+                dto.setPublisher(rs.getString("publisher"));
+                dto.setTotalpage(rs.getInt("totalpage"));
+                dto.setAmount(rs.getInt("amount"));
+
+                list.add(dto);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                rs.close();
+                pstmt.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        return list;
+    }
+
+    public ArrayList<BookDTO> Select(String type, BookDTO search)
+    {
+        ArrayList<BookDTO> list = new ArrayList<>();
+
+        try
+        {
+            switch(type)
+            {
+                case "C":
+                    pstmt = conn.prepareStatement("select * from book_tbl where BookCode like concat ('%', ?, '%')");
+                    pstmt.setInt(1, search.getBookcode());
+                    break;
+                case "N":
+                    pstmt = conn.prepareStatement("select * from book_tbl where BookName like concat ('%', ?, '%')");
+                    pstmt.setString(1, search.getBookname());
+                    break;
+                case "P":
+                    pstmt = conn.prepareStatement("select * from book_tbl where Publisher like concat ('%', ?, '%')");
+                    pstmt.setString(1, search.getPublisher());
+                    break;
+            }
+            rs = pstmt.executeQuery();
+
+            BookDTO dto;
+            while(rs.next())
+            {
+                dto = new BookDTO();
+                dto.setNo(rs.getInt("no"));
+                dto.setBookcode(rs.getInt("bookcode"));
+                dto.setBookname(rs.getString("bookname"));
+                dto.setPublisher(rs.getString("publisher"));
+                dto.setTotalpage(rs.getInt("totalpage"));
+                dto.setAmount(rs.getInt("amount"));
+
+                list.add(dto);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                rs.close();
+                pstmt.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        return list;
+    }
+
+    public ArrayList<BookDTO> Select(int startnum, int endnum)
+    {
+        ArrayList<BookDTO> list = new ArrayList<>();
+
+        try
+        {
+            pstmt = conn.prepareStatement("select * from book_tbl where No between ? and ?");
+            pstmt.setInt(1, startnum);
+            pstmt.setInt(2, endnum);
+            rs = pstmt.executeQuery();
+
+            BookDTO dto;
+            while(rs.next())
+            {
+                dto = new BookDTO();
+                dto.setNo(rs.getInt("no"));
+                dto.setBookcode(rs.getInt("bookcode"));
+                dto.setBookname(rs.getString("bookname"));
+                dto.setPublisher(rs.getString("publisher"));
+                dto.setTotalpage(rs.getInt("totalpage"));
+                dto.setAmount(rs.getInt("amount"));
+
+                list.add(dto);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                rs.close();
+                pstmt.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        return list;
     }
 
 //    public static void main(String[] args)
