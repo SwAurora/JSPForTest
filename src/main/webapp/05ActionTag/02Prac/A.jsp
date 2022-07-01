@@ -8,6 +8,6 @@
     request.setAttribute("A", "지나옴");
 %>
 
-<jsp:forward page="B.jsp"></jsp:forward>
+<jsp:forward page="B.jsp"/>
 </body>
 </html>

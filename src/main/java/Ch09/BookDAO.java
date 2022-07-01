@@ -276,10 +276,4 @@ public class BookDAO
 
         return list;
     }
-    //    public static void main(String[] args)
-    //    {
-    //        BookDTO dto = new BookDTO(0, 10101010, "Title", "Publisher", 100, 10);
-    //        BookDAO dao = BookDAO.getInstance();
-    //        dao.Post200(dto);
-    //    }
 }

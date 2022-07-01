@@ -19,7 +19,7 @@
     String word = request.getParameter("word");
 
     BookDTO search = new BookDTO();
-    ArrayList<BookDTO> list = null;
+    ArrayList<BookDTO> list;
     if(type != null)
     {
         switch(type)

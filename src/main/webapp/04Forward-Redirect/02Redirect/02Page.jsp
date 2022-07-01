@@ -26,8 +26,7 @@
 
   //dispatcher.forward()
   //->request객체,response객체의 제어권을 넘기는데 사용
-  RequestDispatcher dispatcher=
-          request.getRequestDispatcher("03Page.jsp");
+  RequestDispatcher dispatcher = request.getRequestDispatcher("03Page.jsp");
 
   dispatcher.forward(request,response);
 

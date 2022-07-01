@@ -14,7 +14,7 @@
         }
     }
 %>
-<a href="RemoveCookie.jsp?name=C1">C1 쿠키삭제</a>&nbsp
+<a href="RemoveCookie.jsp?name=C1">C1 쿠키삭제</a>&nbsp;
 <a href="RemoveCookie.jsp?name=C2">C2 쿠키삭제</a>
 </body>
 </html>

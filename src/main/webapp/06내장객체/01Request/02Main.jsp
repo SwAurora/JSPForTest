@@ -17,7 +17,7 @@
     {
         FileWriter wout = new FileWriter("C://upload//test.txt");
         //접속날짜시간, 원격 IP, 원격브라우저
-        wout.write(new Date().toString() + " | ");
+        wout.write(new Date() + " | ");
         wout.write(request.getRemoteAddr() + " | ");
         wout.write(request.getHeader("User-agent") + "\n");
         wout.flush();
